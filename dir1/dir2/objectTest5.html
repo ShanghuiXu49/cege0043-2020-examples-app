@@ -1,0 +1,35 @@
+<!doctype>
+<html>
+<head>
+<title>Object Orientation in Javascript</title>
+</head>
+<body>
+<h2>Object Orientation in Javascript</h2>
+<p>Click the button to run the test</p>
+<button id="ootest" onclick="runtest();">Click to run the O-O test</button>
+<script>
+function Car (make, model, colour) {
+	// some code goes here
+	this.make = make;
+	this.model = model;
+	this.colour = colour;
+	this.details = function() {
+	       return this.make + " "   + this.model;};
+}
+
+var car3 = new Car("Volvo","300","blue","worst car in the world");
+var car4 = new Car();
+
+function runtest() {
+	alert(car3.make);
+	alert(car4.make);
+
+	alert(car3.details());
+	alert(car4.details());
+}
+
+
+</script>
+
+</body>
+</html>

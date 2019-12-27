@@ -1,0 +1,65 @@
+<!doctype>
+<html>
+<head>
+<title>Object Orientation in Javascript</title>
+</head>
+<body>
+<h2>Object Orientation in Javascript</h2>
+<p>Click the button to run the test</p>
+<button id="ootest" onclick="runtest();">Click to run the O-O test</button>
+<script>
+
+// define the Animal class and add some methods
+function Animal() {
+}
+Animal.prototype.makeNoise = function() {
+	alert("noise noise");
+}
+Animal.prototype.eat = function (){
+	alert("yum yum");
+}
+Animal.prototype.walk = function (){
+	alert("walk walk");
+}
+
+// define the Dog class
+function Dog(){}
+Dog.prototype = new Animal();
+
+// Correct the constructor pointer, because it points to Animal
+Dog.prototype.constructor = Dog;
+
+// add a new function to allow the dog to wag their tail
+Dog.prototype.wagtail = function () {
+	alert("wag tail");
+
+}
+// Dogs bark, so override the makeNoise method
+Dog.prototype.makeNoise = function() {
+	alert("woof woof");
+}
+
+
+// run the test
+function runtest(){
+
+	// this is what the parent class does
+	var animal1 = new Animal();
+	animal1.eat();
+	animal1.makeNoise();
+	
+	var dog1 = new Dog();
+	// use an inherited method
+	dog1.eat();
+	
+	// and the new methods for the Dog class
+	dog1.makeNoise();
+	dog1.wagtail();
+	
+	
+}
+
+</script>
+
+</body>
+</html>
