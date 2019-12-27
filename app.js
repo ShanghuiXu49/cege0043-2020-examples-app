@@ -38,4 +38,11 @@ app.get('/:name1/:name2', function (req, res) {
 });
 
 
+app.get('/:name1/:name2/:name3', function (req, res) {
+// the console is the command line of your server 
+// you will see the console.log values in the terminal window
+ console.log('request '+req.params.name1+"/"+req.params.name2+"/"+req.params.name3); 
+  // send the response
+  res.sendFile(__dirname + '/'+req.params.name1+'/'+req.params.name2+ '/'+req.params.name3);
+});
 
