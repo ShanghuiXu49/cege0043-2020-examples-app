@@ -7,3 +7,9 @@ var https = require('https');
 var app = express();
 
 
+var privateKey = fs.readFileSync('/home/studentuser/certs/cert.key').toString();
+var certificate = fs.readFileSync('/home/studentuser/certs/cert.crt').toString();  
+
+var credentials = {key: privateKey, cert: certificate};
+var httpsServer = https.createServer(credentials, app);
+
