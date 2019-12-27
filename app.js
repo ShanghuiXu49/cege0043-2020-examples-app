@@ -17,6 +17,6 @@ httpsServer.listen(3000);
 
 
 app.get('/',function (req,res) {
-	res.send("Hello World from the data API HTTPS Server");
+	res.send("Hello World from the class test server");
 });
 
