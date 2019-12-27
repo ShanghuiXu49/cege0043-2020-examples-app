@@ -1,0 +1,60 @@
+<html>
+<head>
+	<!-- the following links add the CSS and Javascript required for the Leaflet Map -->
+	<script src="javascript.js"></script>
+	<!-- the following links incorporate the CSS required for custom icon creation -->
+	<script>
+	// this is a global variable
+	// NB: I'm deliberately not using upper case to illustrate a problem
+	// it is good practice to name your globals using upper case
+
+	var myName = 'Claire';
+
+	var	mySurname = 'Ellul';
+
+	function testLoop() {
+		for (var i =0; i< 5;i++){
+			document.getElementById("loopresults").innerHTML = document.getElementById("loopresults").innerHTML + "<br>"+ i;
+		}
+	}
+	function testGlobalLocal() {
+		// first use the global variables
+		// note that even though we define myName after this line
+		// we still get undefined for myName - so the local variable 
+		// overrides the global 
+		alert("Global: "+ myName + " "+ mySurname);
+
+		// now define a local variable - this will override the global value
+		var myName = 'C';
+		alert("Local and Global: "+ myName + " "+ mySurname);
+
+		// you can - but you shouldn't - create a variable without VAR
+		// this is automatically a global variable and can be
+		// referenced anywhere in the code
+		myCourse = 'CEGE0043';
+
+		// now call another function to see if the global has actually changed
+		hasGlobalChanged();
+
+	}
+	function hasGlobalChanged() {
+		alert("Has Global Changed: "+ myName + " "+ mySurname + " "+ myCourse);
+			}
+	</script>
+</script>
+
+	</head>
+<body>
+<button id="testLoop" onclick="testLoop()">Click here to test the loop</button>
+<div id="loopresults"></div>
+<br><br>
+<button id="testConditional" onclick="testConditional()">Click here to test a conditional statement</button><input type="text" id="firstname"></input>Type firstname here<br><br>
+
+<button id="testFunctionParameters" onclick="testFunctionParameters(document.getElementById('surname').value)">Click here to test a function with parameters</button><input type="text" id="surname"></input>Type surname here<br><br>
+
+
+<button id="testGlobalLocal" onclick="testGlobalLocal()">Click here to test global and local variables</button>
+
+	
+</body>
+</html>
