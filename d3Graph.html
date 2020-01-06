@@ -1,0 +1,53 @@
+<head>
+
+
+<title>D3 Graph</title>
+<!-- example adapted from: https://bost.ocks.org/mike/bar/ -->
+<!-- make sure you import the D3 script file -->
+<script src="https://d3js.org/d3.v5.min.js"></script>
+
+<style>
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+</style>
+
+</head>
+<body>
+<!-- create a div to hold the graph - NB div class must be chart -->
+<div class="chart"></div>
+<script>
+	// define the data
+	var data = [4, 8, 15, 16, 23, 42];
+
+	// select the div
+	// note that the following command selects the first div which has class "chart"
+	var chart = d3.select(".chart");
+
+	// add the data to the div
+	// first create an empty selection for chart
+	// then add the data
+	var bar = chart.selectAll("div");
+	var barUpdate = bar.data(data);
+
+
+	// create the correct number of nodes using enter()
+	var barEnter = barUpdate.enter().append("div");
+
+	// style the nodes - d in this case is the data array
+	barEnter.style("width", function(d) { return d * 10 + "px"; });
+
+	// add the text - d is the data array
+	barEnter.text(function(d) { return d; });
+ 
+</script>
+
+
+</body>
