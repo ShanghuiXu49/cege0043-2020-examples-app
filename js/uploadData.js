@@ -38,7 +38,7 @@ function startDataUpload() {
 	}
 
 	// finally add the port id
-	postString = postString +"&port_id"+httpsPortNumberAPI;
+	postString = postString +"&port_id="+httpsPortNumberAPI;
 	
 	processData(postString);
 
