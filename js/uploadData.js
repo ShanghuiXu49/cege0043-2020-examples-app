@@ -46,6 +46,7 @@ function processData(postString) {
 	var serviceUrl= "https://developer.cege.ucl.ac.uk:"+ httpsPortNumberAPI+"/testCRUD"
    $.ajax({
     url: serviceUrl,
+    crossDomain: true,
     type: "POST",
     dataType: "json",
     success: dataUploaded,
