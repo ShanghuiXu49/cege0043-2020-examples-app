@@ -42,14 +42,15 @@ function startDataUpload() {
 
 }
 
-var client;
-
 function processData(postString) {
-   client = new XMLHttpRequest();
-   client.open('POST','http://developer.cege.ucl.ac.uk:30261/uploadData',true);
-   client.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-   client.onreadystatechange = dataUploaded;  
-   client.send(postString);
+	var serviceUrl= "https://developer.cege.ucl.ac.uk:"+ httpsPortNumberAPI+"/testCRUD"
+   $.ajax({
+    url: serviceUrl,
+    type: "POST",
+    dataType: "json",
+    success: dataUploaded,
+    data: postString
+}); 
 }
 // create the code to wait for the response from the data server, and process the response once it is received
 function dataUploaded() {
