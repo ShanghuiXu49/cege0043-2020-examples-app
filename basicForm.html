@@ -47,8 +47,20 @@
 <br />
 
 </div>
-
+<script src="js/utilities.js"></script> 
 <script src="js/uploadData.js"> </script>
+<!-- get the port numbers -->
+<script>
+function loadMap() {
+	getPorts();
+}
 
+
+document.addEventListener('DOMContentLoaded', function() {
+	console.log("listener domcontentloaded");
+	loadMap();
+}, false);
+
+</script>
 
 </body>
