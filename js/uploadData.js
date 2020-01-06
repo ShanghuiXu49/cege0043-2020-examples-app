@@ -48,16 +48,12 @@ function processData(postString) {
     url: serviceUrl,
     crossDomain: true,
     type: "POST",
-    dataType: "json",
-    success: dataUploaded,
+    success: function(data){console.log(data); dataUploaded(data);},
     data: postString
 }); 
 }
-// create the code to wait for the response from the data server, and process the response once it is received
-function dataUploaded() {
-  // this function listens out for the server to say that the data is ready - i.e. has state 4
-  if (client.readyState == 4) {
+// create the code to process the response from the data server
+function dataUploaded(data) {
     // change the DIV to show the response
-    document.getElementById("dataUploadResult").innerHTML = client.responseText;
-    }
+    document.getElementById("dataUploadResult").innerHTML = JSON.stringify(data);
 }
