@@ -43,7 +43,7 @@ function startDataUpload() {
 }
 
 function processData(postString) {
-	var serviceUrl= "https://developer.cege.ucl.ac.uk:"+ httpsPortNumberAPI+"/testCRUD"
+	var serviceUrl= "https://developer.cege.ucl.ac.uk:"+ httpsPortNumberAPI+"/insertFormData"
    $.ajax({
     url: serviceUrl,
     crossDomain: true,
