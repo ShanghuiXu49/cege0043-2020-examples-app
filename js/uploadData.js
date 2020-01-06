@@ -37,6 +37,8 @@ function startDataUpload() {
  		 postString=postString+"&lecturetime=afternoon";
 	}
 
+	// finally add the port id
+	postString = postString +"&port_id"+httpsPortNumberAPI;
 	
 	processData(postString);
 
