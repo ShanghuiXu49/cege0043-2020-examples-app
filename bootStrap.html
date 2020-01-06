@@ -116,4 +116,21 @@
 
   <script src="js/sb-admin-2.js"></script>
 
+
+<!-- functionality to get ports -->
+<!-- load utilities.js -->
+<script src="js/utilities.js"></script> 
+
+<script>
+  function loadMap() {
+  getPorts();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("listener domcontentloaded");
+  loadMap();
+}, false);
+
+</script>
+
   </html>
