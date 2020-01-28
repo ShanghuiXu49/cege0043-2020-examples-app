@@ -13,7 +13,7 @@ var certificate = fs.readFileSync('/home/studentuser/certs/cert.crt').toString()
 var credentials = {key: privateKey, cert: certificate};
 var httpsServer = https.createServer(credentials, app);
 
-httpsServer.listen(4443);
+httpsServer.listen(3000);
 
 
 app.get('/',function (req,res) {
