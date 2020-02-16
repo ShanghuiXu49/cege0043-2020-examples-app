@@ -1,0 +1,115 @@
+<!doctype html>
+<head>
+<title>Simple Form Creation Example</title>
+</head>
+<body>
+
+<div >
+
+<h1>Simple Object Orientation Examples</h1>
+
+
+<button id="button1" onclick="createAnimal()">Create a new noisy Animal</button>
+<br />
+<br />
+<button id="button1" onclick="createDog()">Create a new noisy Dog</button>
+<br />
+<br />
+<button id="button1" onclick="createCat()">Create a new Cat</button>
+
+<script>
+// example code adapted from here: https://stackoverflow.com/questions/1586915/performing-inheritance-in-javascript - accessed 4th January 2018
+function createAnimal() {
+	var myAnimal = new Animal();
+	myAnimal.makeNoise();
+	myAnimal.eat();
+	myAnimal.walk();
+
+}
+
+function createDog() {
+	var myDog = new Dog();
+	myDog.makeNoise();
+	myDog.eat();
+	myDog.walk();
+	myDog.wagtail();
+
+	// now query the properties
+	alert(myDog.species);
+	alert(myDog.status);
+
+}
+
+function createCat() {
+	var myCat = new Cat();
+	myCat.makeNoise();
+	myCat.eat();
+	myCat.walk();
+	myCat.catchMouse();
+
+	// now query the properties
+	alert(myCat.species);
+	alert(myCat.status);
+}
+
+
+// define the Animal class
+function Animal() {
+
+}
+Animal.prototype.makeNoise = function() {
+	alert("noise noise");
+}
+
+Animal.prototype.eat = function (){
+	alert("yum yum");
+}
+
+Animal.prototype.walk = function (){
+	alert("walk walk");
+}
+
+
+// define the Cat class - keep it identical to the Animal class with one additional method - catching mice
+function Cat(){
+	// add some properties
+	this.species="cat";
+	this.status="alive";
+}
+Cat.prototype = new Animal();
+
+// Correct the constructor pointer, because it points to Animal
+Cat.prototype.constructor = Cat;
+
+// add a new function to allow the dog to wag their tail
+Cat.prototype.catchMouse = function () {
+	alert("catch mouse");
+
+}
+
+
+// define the Dog class
+function Dog(){
+	this.species="cat";
+	var status="alive";
+
+}
+Dog.prototype = new Animal();
+// Correct the constructor pointer, because it points to Animal
+Dog.prototype.constructor = Dog;
+// add a new function to allow the dog to wag their tail
+Dog.prototype.wagtail = function () {
+	alert("wag tail");
+
+}
+// Dogs bark, so override the makeNoise method
+Dog.prototype.makeNoise = function() {
+	alert("woof woof");
+}
+
+
+
+
+</script>
+
+</body>
