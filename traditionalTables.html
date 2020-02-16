@@ -23,6 +23,9 @@
           // generate a string for the table
           var tableHTML = "<table>";
 
+          // add the column titles
+          tableHTML += "<tr><td><h2>Table Name</h2></td><td><h3>Feature Type</h3> </td><td><h3>Layer Type</h3> </td></tr></b>";
+
           for (i=0;i< features.length;i++) {
             // add a new row
             tableHTML += "<tr>";
@@ -57,7 +60,7 @@
           tableHTML +="</table>";
 
           // update the DIV
-          document.getElementbyId("tablediv").innerHTML = tableHTML;
+          document.getElementById("tablediv").innerHTML = tableHTML;
         }
         });
 

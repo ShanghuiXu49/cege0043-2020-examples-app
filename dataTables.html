@@ -1,0 +1,113 @@
+<DOCTYPE html>
+<head>
+  <title>Traditional Tables</title>
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+ 
+</head>
+<body>
+  <table id="data2" class="display">
+    <thead>
+    <tr><th>hellow </th><th>world</th></tr> </thead>
+    <tbody><tr><td>hello3 </td><td>world</td></tr>
+    <tr><td>hello3 </td><td>world</td></tr></tbody>
+      </table>
+  <div id="tablediv"></div>
+</body>  
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script> 
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+  <script>
+
+/*  var layers =[];
+  // get the layer list as geoJSON and for each layer 
+  // create a cesium layer
+    $.ajax({url: "http://134.209.23.3:3000/getJSON/gisdb7/polimi/layerlist/id", success: function(result){
+          console.log("result "+result);
+          var features;
+          features = result.features;
+
+          // generate a string for the table
+          var tableHTML = "<table id='datatable' class='display'>";
+
+          // add the column titles
+          tableHTML += "<tr><td><h2>Table Name</h2></td><td><h3>Feature Type</h3> </td><td><h3>Layer Type</h3> </td></tr></b>";
+
+          for (i=0;i< features.length;i++) {
+            // add a new row
+            tableHTML += "<tr>";
+
+            // add a new column 
+            tableHTML +="<td>";
+            // add the table name
+            tableHTML +=features[i].properties.table_name;
+            // close the column
+            tableHTML +="</td>";
+
+
+            // add a new column 
+            tableHTML +="<td>";
+            // add the feature type
+            tableHTML +=features[i].properties.feature_type;
+            // close the column
+            tableHTML +="</td>";
+
+            // add a new column 
+            tableHTML +="<td>";  
+            tableHTML +=features[i].properties.layer_type;
+            // close the column
+            tableHTML +="</td>";
+            
+            //close the row
+            tableHTML +="</tr>";
+
+          } // end of the for loop
+
+          // close the table
+          tableHTML +="</table>";
+
+          // update the DIV
+          document.getElementById("tablediv").innerHTML = tableHTML;
+        
+
+
+        }
+        });
+*/
+            $(document).ready( function () {
+             dataTable = $('#data2').DataTable({
+              paging: true,
+              pageLength: 5,
+              lengthChange: true,
+                  lengthMenu: [5,8,10],
+              scrollX: "100%",
+              pageResize: true,
+              initComplete: function () {
+                    this.api().columns().every( function () {
+                      var column = this;
+                      var select = $('<select><option value=""></option></select>')
+                          .appendTo( $(column.header()))
+                          .on( 'change', function () {
+                              var val = $.fn.dataTable.util.escapeRegex(
+                                  $(this).val()
+                              );
+                              column
+                                  .search( val ? '^'+val+'$' : '', true, false )
+                                  .draw();
+                          }); // on change
+                        column.data().unique().sort().each( function ( d, j ) {
+                           select.append( '<option value="'+d+'">'+d+'</option>' )
+                        }); // column data
+                      }); // this.api
+                } // init complete
+                }); // asset_table_id data table
+                dataTable.draw();
+          dataTable.columns.adjust().draw();
+            } );
+ 
+  </script>
+
+</html>
