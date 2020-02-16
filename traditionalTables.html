@@ -1,0 +1,67 @@
+<DOCTYPE html>
+<head>
+  <title>Traditional Tables</title>
+</head>
+<body>
+  <div id="tablediv"></div>
+</body>  
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script> 
+
+  <script>
+
+  var layers =[];
+  // get the layer list as geoJSON and for each layer 
+  // create a cesium layer
+    $.ajax({url: "http://134.209.23.3:3000/getJSON/gisdb7/polimi/layerlist/id", success: function(result){
+          console.log("result "+result);
+          var features;
+          features = result.features;
+
+          // generate a string for the table
+          var tableHTML = "<table>";
+
+          for (i=0;i< features.length;i++) {
+            // add a new row
+            tableHTML += "<tr>";
+
+            // add a new column 
+            tableHTML +="<td>";
+            // add the table name
+            tableHTML +=features[i].properties.table_name;
+            // close the column
+            tableHTML +="</td>";
+
+
+            // add a new column 
+            tableHTML +="<td>";
+            // add the feature type
+            tableHTML +=features[i].properties.feature_type;
+            // close the column
+            tableHTML +="</td>";
+
+            // add a new column 
+            tableHTML +="<td>";  
+            tableHTML +=features[i].properties.layer_type;
+            // close the column
+            tableHTML +="</td>";
+            
+            //close the row
+            tableHTML +="</tr>";
+
+          } // end of the for loop
+
+          // close the table
+          tableHTML +="</table>";
+
+          // update the DIV
+          document.getElementbyId("tablediv").innerHTML = tableHTML;
+        }
+        });
+
+
+  </script>
+
+</html>

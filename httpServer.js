@@ -5,15 +5,12 @@ var fs = require('fs');
 var app = express();
 
 // add an https server to serve files 
-var https = require('https');
+var http = require('http');
 
-var privateKey = fs.readFileSync('/home/studentuser/certs/cert.key').toString();
-var certificate = fs.readFileSync('/home/studentuser/certs/cert.crt').toString();  
 
-var credentials = {key: privateKey, cert: certificate};
-var httpsServer = https.createServer(credentials, app);
+var httpServer = http.createServer(app);
 
-httpsServer.listen(3000);
+httpServer.listen(3000);
 
 
 app.get('/',function (req,res) {
