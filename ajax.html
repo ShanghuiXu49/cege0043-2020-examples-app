@@ -1,0 +1,50 @@
+<DOCTYPE html>
+<head>
+  <title>AJAX example</title>
+</head>
+<body>
+  Use AJAX to load POI data - making sure to use the correct port for the URL.  They results are displayed in a DIV
+  <div id="tablediv"></div>
+</body>  
+
+
+ <!-- use JQuery as it makes AJAX easy -->
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script> 
+
+ <!-- also make sure to get port functions -->
+  <script src="js/utilities.js"></script> 
+
+<!-- the following script will load the port numbers when the page loads -->
+<script>
+
+
+function startPage() {
+	getPorts();
+	loadPOIs();
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+	console.log("listener domcontentloaded");
+	startPage();
+}, false);
+
+// make sure the data api server is running before you run this test
+function loadPOIs() {
+
+ //   $.ajax({url: "http://134.209.23.3:3000/getJSON/gisdb7/polimi/layerlist/id", success: function(result){
+
+ 	console.log("https://developer.cege.ucl.ac.uk:"+ httpsPortNumberAPI + "/getPOI");
+    $.ajax({url:"https://developer.cege.ucl.ac.uk:"+ httpsPortNumberAPI + "/getPOI",
+    	crossDomain: true,
+ 		success: function(result){
+    		document.getElementById("tablediv").innerHTML = result;
+    }}); //end of the AJAX call
+
+}
+
+</script>
