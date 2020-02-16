@@ -1,15 +1,7 @@
 <DOCTYPE html>
-<html lang="en">
 <head>
-  <!-- Use correct character set. -->
-  <meta charset="utf-8">
-  <!-- Tell IE to use the latest, best version. -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <!-- Make the application on mobile take up the full browser screen and disable user scaling. -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title>Hello Cesium!</title>
   <script src="Build/Cesium/Cesium.js"></script>
-
   <style>
       @import url(Build/Cesium/Widgets/widgets.css);
       html, body, #cesiumContainer {
@@ -22,12 +14,11 @@
             left: 5px;
         }
   </style>
-
   
 </head>
 <body>
   <div id="cesiumContainer"></div>
-  
+</body>  
   <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -51,19 +42,15 @@
 <script>
 
 var layers =[];
-// get the layer list as geoJSON and for each layer 
-// create a cesium layer
+  // get the layer list as geoJSON and for each layer 
+  // create a cesium layer
     $.ajax({url: "http://134.209.23.3:3000/getJSON/gisdb7/polimi/layerlist/id", success: function(result){
           var vectorCount = 0;
-          var tileCount = 0;
           console.log("result "+result);
           var features;
           features = result.features;
-          console.log(features.length);
           for (i=0;i< features.length;i++) {
-            //
             console.log(features[i].properties.table_name);
-            //console.log(feature.properties.table_name+ " "+feature.properites.id_column + " "+feature.properties.geom_column);
             console.log(features[i].properties.feature_type+ "   "+features[i].properties.layer_type);
             if (features[i].properties.layer_type == "vector"){
                 loadVectorLayer(features[i],vectorCount);
@@ -75,10 +62,10 @@ var layers =[];
 
 
 function loadVectorLayer(feature,i){
-            var layerURL = 'http://134.209.23.3:3000/getJSON/gisdb7/'+feature.properties.schema+'/'+feature.properties.table_name+'/'+feature.properties.geom_column + '/'+feature.properties.id_column;
+
+            var layerURL = 'http://134.209.23.3:3000/geoJSON/gisdb7/'+feature.properties.schema+'/'+feature.properties.table_name+'/'+feature.properties.geom_column + '/'+feature.properties.id_column;
             console.log(layerURL);
             var dataSource = new Cesium.GeoJsonDataSource(feature.properties.feature_type);
-
             var geoJSONOptions = {
               stroke: Cesium.Color.HOTPINK,
                   fill: feature.properties.layer_colour,
@@ -88,35 +75,15 @@ function loadVectorLayer(feature,i){
 
            layers[i]=dataSource.load(layerURL, geoJSONOptions);
            layers[i].name = feature.properties.feature_type;       
+
             // use a promise approach so that some functionlaity
             // can be run once the layer is loaded
             var layername =feature.properties.feature_type;
             layers[i].then(function(dataSource,layername){
                   dataSource.name = layername;
-                 //dataSource.height = -100;
                   dataSource.clampToGround=false;
                   viewer.dataSources.add(dataSource);
-
-                  //Get the array of entities
-        var entities = dataSource.entities.values;
-
-        for (var i = 0; i < entities.length; i++)
-        {
-            //Set the height and the material of each polyline
-            var entity = entities[i];
-            entity.billboard = null;
-            if (Cesium.defined(entity.polyline)) {
-                entity.polyline.classificationType = Cesium.ClassificationType.TILES; 
-            }         
-                        if (Cesium.defined(entity.polygon)) {
-                entity.polygon.classificationType = Cesium.ClassificationType.TILES;
-            }            
-   
-       }
-                  
-            }).otherwise(function(error){
-
-              // error message goes here
+                  viewer.zoomTo(dataSource);
             });
 
 }
@@ -126,5 +93,5 @@ function loadVectorLayer(feature,i){
 
   
 
-</body>
+
 </html>
