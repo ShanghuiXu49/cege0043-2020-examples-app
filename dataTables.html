@@ -6,12 +6,6 @@
  
 </head>
 <body>
-  <table id="data2" class="display">
-    <thead>
-    <tr><th>hellow </th><th>world</th></tr> </thead>
-    <tbody><tr><td>hello3 </td><td>world</td></tr>
-    <tr><td>hello3 </td><td>world</td></tr></tbody>
-      </table>
   <div id="tablediv"></div>
 </body>  
   <script
@@ -22,7 +16,7 @@
 
   <script>
 
-/*  var layers =[];
+  var layers =[];
   // get the layer list as geoJSON and for each layer 
   // create a cesium layer
     $.ajax({url: "http://134.209.23.3:3000/getJSON/gisdb7/polimi/layerlist/id", success: function(result){
@@ -31,10 +25,10 @@
           features = result.features;
 
           // generate a string for the table
-          var tableHTML = "<table id='datatable' class='display'>";
+          var tableHTML = "<table id='data3' class='display'>";
 
           // add the column titles
-          tableHTML += "<tr><td><h2>Table Name</h2></td><td><h3>Feature Type</h3> </td><td><h3>Layer Type</h3> </td></tr></b>";
+          tableHTML += "<thead><tr><td><h2>Table Name</h2></td><td><h3>Feature Type</h3> </td><td><h3>Layer Type</h3> </td></tr></b></thead><tbody>";
 
           for (i=0;i< features.length;i++) {
             // add a new row
@@ -67,23 +61,31 @@
           } // end of the for loop
 
           // close the table
-          tableHTML +="</table>";
+          tableHTML +="</tbody></table>";
 
           // update the DIV
           document.getElementById("tablediv").innerHTML = tableHTML;
-        
 
+          // don't try and create the data table until the basic HTML table has been drawn
+          createDataTable();  
 
         }
         });
-*/
-            $(document).ready( function () {
-             dataTable = $('#data2').DataTable({
+
+function createDataTable(){
+
+            dataTable = $('#data3').DataTable({
               paging: true,
               pageLength: 5,
               lengthChange: true,
                   lengthMenu: [5,8,10],
               scrollX: "100%",
+                  buttons: [
+            'copyHtml5',
+            'excelHtml5',
+            'csvHtml5',
+            'pdfHtml5'
+        ],
               pageResize: true,
               initComplete: function () {
                     this.api().columns().every( function () {
@@ -106,7 +108,7 @@
                 }); // asset_table_id data table
                 dataTable.draw();
           dataTable.columns.adjust().draw();
-            } );
+            }
  
   </script>
 
